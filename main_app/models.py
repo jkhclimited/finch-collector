@@ -8,7 +8,16 @@ COPIES = (
     ('3', 'Playset (3)')
 )
 
-# Create your models here.
+class EffectType(models.Model):
+    name = models.TextField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('effect_detail', kwargs={'pk': self.id})
+
+
 class Card(models.Model):
     card_type = models.CharField(max_length=20)
     name = models.CharField(max_length=100)
@@ -19,6 +28,7 @@ class Card(models.Model):
     defense = models.IntegerField(default=0)
     property = models.CharField(max_length=20, default='N/A')
     description = models.TextField(max_length=1000)
+    effect_type = models.ManyToManyField(EffectType)
 
     def __str__(self):
         return self.name
