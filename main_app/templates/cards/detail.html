@@ -64,6 +64,12 @@
               {{ effect.name }}
             </span>
           </div>
+          <div class="card-action">
+            <form action="{% url 'disassoc_effect' card.id effect.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
         </div>
       {% endfor %}
     {% else %}

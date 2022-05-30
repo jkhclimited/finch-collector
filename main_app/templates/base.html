@@ -20,10 +20,17 @@
         </ul>
         <ul class="right">
           <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'cards_create' %}">Add a Card</a></li>
-          <li><a href="{% url 'index' %}">View My Cards</a></li>
-       </ul>
-       
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'cards_create' %}">Add Cards</a></li>
+            <li><a href="{% url 'index' %}">View Cards</a></li>
+            <li><a href="{% url 'effect_create' %}">Add Effect</a></li>
+            <li><a href="{% url 'effect_index' %}">View Effect</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
+        </ul>
       </div>
     </nav>
   </header>
